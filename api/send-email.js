@@ -7,13 +7,11 @@ export default async function handler(req, res) {
 
   const { name, email, message } = req.body;
 
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: "Missing fields" });
-  }
-
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_PASS
@@ -25,17 +23,12 @@ export default async function handler(req, res) {
       to: process.env.GMAIL_USER,
       replyTo: email,
       subject: `New message from ${name}`,
-      text: `
-Name: ${name}
-Email: ${email}
-
-${message}
-      `
+      text: message
     });
 
     res.status(200).json({ success: true });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Email failed" });
+    console.error("MAIL ERROR:", err);
+    res.status(500).json({ error: "Send failed" });
   }
 }
