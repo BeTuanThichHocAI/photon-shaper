@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Photon-Shaper | Project Overview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg: #05060a;
+  --neon: #7f7cff;
+  --text: #e6e6f0;
+  --glass: rgba(255,255,255,0.06);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+#bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+#lab3d canvas {
+  position: relative;
+  inset: auto;
+  z-index: 1;
+}
+
+#lab3d-right canvas {
+  position: relative;
+  inset: auto;
+  z-index: 1;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 5%;
+  display: flex;
+  justify-content: center;
+  background: rgba(10, 12, 30, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+nav a {
+  color: var(--text);
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+nav a:hover {
+  color: var(--neon);
+}
+.section {
+  padding: 80px 5%;
+}
+.section.dark {
+  background: radial-gradient(circle at top, #0a0b16, #05060a);
+}
+.center { text-align: center; }
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 60px; /* offset for fixed nav */
+}
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 4px;
+  color: var(--neon);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+.glow-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  text-shadow: 0 0 20px var(--neon);
+}
+.subtitle {
+  opacity: 0.85;
+  margin: 25px auto;
+  max-width: 700px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+.hero-actions {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cta-primary, .cta-secondary {
+  padding: 12px 24px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: 0.3s ease;
+}
+.cta-primary {
+  background: linear-gradient(135deg, #7f7cff, #2a2aff);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(127, 124, 255, 0.4);
+}
+.cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(127, 124, 255, 0.8);
+}
+.cta-secondary {
+  border: 1px solid rgba(127, 124, 255, 0.6);
+  color: #9aa0ff;
+}
+.cta-secondary:hover {
+  background: rgba(127, 124, 255, 0.1);
+}
+
+/* CARD GRID */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+.card {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  padding: 25px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+}
+.card h3 {
+  margin-bottom: 15px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 400;
+}
+
+/* About section */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.about-content .col h3 {
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 15px;
+}
+.about-content .col p, .about-content .col ul {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+.about-content .col ul li {
+  list-style: none;
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+.about-content .col ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--neon);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+@media (max-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Team section */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.team-member {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+}
+.team-member img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--neon);
+  margin-bottom: 15px;
+}
+.team-member h3 {
+  font-family: 'Orbitron', sans-serif;
+  margin: 10px 0 5px;
+}
+.team-member p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.team-member p.role {
+  color: #9aa0ff;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+/* Media section */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+.media-item img {
+  width: 100%;
+  border-radius: 6px;
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+.video-item iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 6px;
+}
+
+/* Contact form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+.contact-form input, .contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder {
+  color: #bbb;
+}
+.contact-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #7f7cff, #2a2aff);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+}
+.contact-form button:hover {
+  opacity: 0.9;
+}
+.contact-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+}
+#lab3d {
+  width: 100%;
+  height: 520px;
+  margin-top: 30px;
+  border-radius: 12px;
+  background: radial-gradient(circle at center, #0b0f2a, #05060a);
+  box-shadow:
+    0 0 40px rgba(127,124,255,0.25),
+    inset 0 0 60px rgba(127,124,255,0.15);
+}
+#lab3d-right {
+  width: 100%;
+  height: 420px;
+  margin-top: 30px;
+  border-radius: 12px;
+  background: radial-gradient(circle at center, #0b0f2a, #05060a);
+  box-shadow:
+    0 0 40px rgba(127,124,255,0.25),
+    inset 0 0 60px rgba(127,124,255,0.15);
+}
+.tech-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.lab-wrapper {
+  position: relative;
+  grid-column: 1 / span 2; /* nằm đúng vị trí khoanh đỏ */
+  z-index: 2;
+}
+.team-member img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #7f7cff;
+  background-color: #111; /* fallback nếu ảnh lỗi */
+}
+
+</style>
+
+</head>
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155/build/three.module.js";
+
+window.addEventListener("DOMContentLoaded", () => {
+
+  const container = document.getElementById("lab3d");
+  if (!container) {
+    console.error("❌ Không tìm thấy div #lab3d");
+    return;
+  }
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x05060a);
+
+  const camera = new THREE.PerspectiveCamera(
+    60,
+    container.clientWidth / container.clientHeight,
+    0.1,
+    100
+  );
+  camera.position.set(0, 2, 6);
+  camera.lookAt(0, 0, 0);
+
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  container.appendChild(renderer.domElement);
+
+  /* ==== LIGHT ==== */
+  scene.add(new THREE.AmbientLight(0x8888ff, 0.4));
+  const light = new THREE.PointLight(0x88aaff, 1);
+  light.position.set(5, 5, 5);
+  scene.add(light);
+
+  /* ==== BODY ==== */
+  const body = new THREE.Mesh(
+    new THREE.CylinderGeometry(1, 1, 6, 48),
+    new THREE.MeshStandardMaterial({
+      color: 0x888888,
+      transparent: true,
+      opacity: 0.4,
+      metalness: 0.1,
+      roughness: 0.6
+
+    })
+  );
+  scene.add(body);
+
+  /* ==== PLASMA ==== */
+  const N = 2000;
+  const pos = new Float32Array(N * 3);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+
+  const mat = new THREE.PointsMaterial({
+    size: 0.08,
+    opacity: 0.75,
+    blending: THREE.AdditiveBlending,
+    color: 0xff66ff,
+    transparent: true
+  });
+
+  const plasma = new THREE.Points(geo, mat);
+  scene.add(plasma);
+
+  let t = 0;
+  const base = [];
+  for (let i = 0; i < N; i++) {
+    const phi = Math.random() * Math.PI * 2;
+    const cost = Math.random() * 2 - 1;
+    const theta = Math.acos(cost);
+    base.push({ phi, theta });
+  }
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.02;
+
+    const r = 1.5 + Math.max(0, Math.sin(t)) * 0.4;
+
+    for (let i = 0; i < N; i++) {
+      const { phi, theta } = base[i];
+      const r = 1.5 + Math.max(0, Math.sin(t)) * 0.5;
+
+      pos[i * 3]     = r * Math.sin(theta) * Math.cos(phi);
+      pos[i * 3 + 1] = r * Math.sin(theta) * Math.sin(phi);
+      pos[i * 3 + 2] = r * Math.cos(theta);
+    }
+    geo.attributes.position.needsUpdate = true;
+
+    body.rotation.y += 0.003;
+    renderer.render(scene, camera);
+  }
+
+  animate();
+});
+
+/* ===============================
+   PHOTON-SHAPER LAB 2 (RE-ENTRY)
+   Python → Three.js
+================================ */
+function initReentryLab(containerId) {
+
+  const container = document.getElementById(containerId);
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x05060a);
+
+  const camera = new THREE.PerspectiveCamera(
+    60,
+    container.clientWidth / container.clientHeight,
+    0.1,
+    100
+  );
+  camera.position.set(0, 2.5, 6);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  container.appendChild(renderer.domElement);
+
+  scene.add(new THREE.AmbientLight(0xffaa66, 0.35));
+  const light = new THREE.PointLight(0xff8844, 1);
+  light.position.set(4, 4, 4);
+  scene.add(light);
+
+  /* === BODY === */
+  const body = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.8, 0.8, 4, 48),
+    new THREE.MeshStandardMaterial({
+      color: 0xcccccc,
+      metalness: 0.2,
+      roughness: 0.6,
+      transparent: true,
+      opacity: 0.55
+    })
+  );
+  scene.add(body);
+
+  /* === PLASMA === */
+  const N = 2500;
+  const base = [];
+  const pos = new Float32Array(N * 3);
+  const col = new Float32Array(N * 3);
+
+  for (let i = 0; i < N; i++) {
+    const phi = Math.random() * Math.PI * 2;
+    const cost = Math.random() * 2 - 1;
+    const theta = Math.acos(cost);
+    base.push({ phi, theta });
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+
+  const mat = new THREE.PointsMaterial({
+    size: 0.06,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.7,
+    blending: THREE.AdditiveBlending
+  });
+
+  const plasma = new THREE.Points(geo, mat);
+  scene.add(plasma);
+
+  /* === PHYSICS CONSTANTS (FROM PY) === */
+  const rho0 = 1.225;
+  const H = 8500;
+  const v = 7800;
+  const k_plasma = 1e-5;
+  const beta = 0.7;
+  const n_crit = 0.35;
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.015;
+
+    const timeNorm = (Math.sin(t) * 0.5 + 0.5);
+    const altitude = 120e3 * Math.pow(1 - timeNorm, 1.2);
+    const rho = rho0 * Math.exp(-altitude / H);
+
+    const heatFlux = Math.sqrt(rho) * Math.pow(v / 7800, 3);
+    const ne = k_plasma * heatFlux * 100;
+    const laser = Math.min(1.0, t / 3);
+    const neEff = ne * (1 - beta * laser);
+
+    const r = 1.4 + 1.8 * neEff;
+
+    for (let i = 0; i < N; i++) {
+      const { phi, theta } = base[i];
+      pos[i * 3]     = r * Math.sin(theta) * Math.cos(phi);
+      pos[i * 3 + 1] = r * Math.sin(theta) * Math.sin(phi);
+      pos[i * 3 + 2] = r * Math.cos(theta);
+
+      /* inferno-like color */
+      col[i * 3]     = 1.0;
+      col[i * 3 + 1] = Math.max(0.2, 1 - neEff * 3);
+      col[i * 3 + 2] = 0.1;
+    }
+
+    geo.attributes.position.needsUpdate = true;
+    geo.attributes.color.needsUpdate = true;
+
+    body.rotation.y += 0.004;
+    camera.position.x = Math.sin(t * 0.3) * 2;
+    camera.lookAt(0, 0, 0);
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+}
+
+/* INIT RIGHT LAB */
+initReentryLab("lab3d-right");
+
+</script>
+
+
+<body>
+
+<py-config>
+    packages = ["numpy", "matplotlib"]
+</py-config>
+
+<canvas id="bg"></canvas>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#technology">Technology</a>
+  <a href="#research">Research</a>
+  <a href="#applications">Applications</a>
+  <a href="#team">Team</a>
+  <a href="#get-involved">Get Involved</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- HERO SECTION -->
+<section id="home" class="hero">
+  <div>
+    <div class="logo">PHOTON-SHAPER</div>
+    <h1 class="glow-title">The Future of Space Was Never Meant to Bend<br>Until Photon-Shaper Redefined It.</h1>
+    <p class="subtitle">
+      This is more than a business proposal — it’s the foundation of the next chapter in aerospace history.
+    </p>
+    <div class="hero-actions">
+      <a href="#technology" class="cta-primary">Explore Photon-Shaper</a>
+      <a href="#team" class="cta-secondary">Meet Our Team</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="section">
+  <h2 class="center">About Us</h2>
+  <div class="about-content">
+    <div class="col">
+      <h3>Our Story</h3>
+      <p>We did not begin in a high-tech aerospace lab. We did not have million-dollar equipment. We did not have NASA engineers mentoring us. We were just ambitious individuals living on a small island in Vietnam, whose dreams were to reach beyond the stars.</p>
+      <p>We started with a seemingly impossible question: “If plasma always forms around spacecraft during re-entry… why don’t we control it to our advantage?” Yet from that vague idea, Photon-Shaper was born: a system that uses high-power lasers, beam-shaping optics, and magnetic fields to create a lightweight, controllable, active plasma shield - without needing extra fuel.</p>
+    </div>
+    <div class="col">
+      <div class="card">
+        <h3>The Problem We Are Solving</h3>
+        <ul>
+          <li>Drag wastes fuel.</li>
+          <li>Heat destroys materials.</li>
+          <li>Blackout disconnects the crew from Earth.</li>
+          <li>No existing technology solves all three - unless plasma can be actively shaped.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Scientific Background</h3>
+        <ul>
+          <li>Femtosecond lasers can reduce drag by up to 50% at Mach 3.</li>
+          <li>Strong magnetic fields can reshape re-entry plasma flows.</li>
+          <li>Beam shaping can control plasma geometry in real time.</li>
+          <li>Photon-Shaper combines all into a compact, scalable system with commercial potential.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY SECTION -->
+<section id="technology" class="section dark">
+  <h2 class="center">Technology</h2>
+  <div class="card-grid">
+    <section id="research" class="section">
+      <div class="card">
+        <h3>How Photon-Shaper Works</h3>
+        <ul>
+          <li>Lasers to generate plasma filaments.</li>
+          <li>Optical beam-shaping lenses to compress or widen the plasma shape.</li>
+          <li>Magnetic coils to “bend” plasma like a sculptor shaping clay.</li>
+          <li>Control algorithms to form a stable, adjustable “plasma dome.”</li>
+        </ul>
+      </div>
+      <div id="lab3d" style="width:100%; height:500px; border-radius:10px;"></div>
+    </section>
+    <section id="research" class="section">
+      <div class="card">
+        <h3>Why It’s Revolutionary</h3>
+        <ul>
+          <li><strong>Active Plasma Shaping:</strong> Controlling its geometry for efficiency.</li>
+          <li><strong>Non-Mechanical Steering:</strong> Create directional forces to steer without wings.</li>
+          <li><strong>Energy Efficiency:</strong> Wide plasma distribution – lower power consumption vs. localized heating.</li>
+          <li><strong>Patent-Ready Design:</strong>
+            <ul>
+              <li>Beam-shaping optical system.</li>
+              <li>Plasma geometry control algorithms.</li>
+              <li>Integrated plasma-dome architecture.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div id="lab3d-right"></div>
+    </section>
+  </div>
+</section>
+
+<!-- RESEARCH SECTION -->
+<section id="research" class="section">
+  <h2 class="center">Research</h2>
+  <div class="card-grid" style="margin-top: 30px;">
+    <div class="card">
+      <h3>Validation Approach</h3>
+      <ul>
+        <li>Existing evidence: Laser-generated plasma reduces drag significantly.</li>
+        <li>Available hardware: Laser modules, magnets, SLM optics are already commercial.</li>
+        <li>Proven physics models: Lorentz-force plasma shaping has been demonstrated.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Planned Experiments (8-Month Roadmap)</h3>
+      <ol>
+        <li><strong>Wind Tunnel Testing:</strong> Measure drag, shock structure, and flow-field changes with plasma activated.</li>
+        <li><strong>RF Blackout Testing:</strong> Test communication through plasma layers in an anechoic chamber.</li>
+        <li><strong>Thermal Shielding Testing:</strong> Measure heat flux reduction and surface temperature with plasma dome.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Current Progress</h3>
+      <ul>
+        <li>A full experimental framework.</li>
+        <li>Device architecture and blueprints.</li>
+        <li>Measurement protocols.</li>
+        <li>Safety plan and validation criteria.</li>
+        <li>A complete 8-month execution roadmap.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATIONS SECTION -->
+<section id="applications" class="section dark">
+  <h2 class="center">Applications</h2>
+  <div class="card-grid" style="margin-top: 30px;">
+    <div class="card">
+      <h3>Use Cases</h3>
+      <ul>
+        <li>Re-entry spacecraft seeking drag and thermal reduction.</li>
+        <li>Hypersonic aircraft and glide vehicles.</li>
+        <li>Systems suffering from blackout.</li>
+        <li>UAVs or drones using plasma lenses.</li>
+        <li>High-speed defense systems.</li>
+        <li>Future civilian hypersonic transportation.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Future Potential</h3>
+      <ul>
+        <li>US–Vietnam flights take only 2 hours (potential).</li>
+        <li>Spacecraft can be reused dozens of times.</li>
+        <li>Hypersonic travel becomes safe and affordable.</li>
+        <li>Photon-Shaper's impact reaches across industries and generations.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM SECTION -->
+<section id="team" class="section">
+  <h2 class="center">Our Team</h2>
+  <div class="team-grid">
+    <div class="team-member">
+      <img src="images/Vuong.jpg" alt="Nguyen Lam Vuong">
+      <h3>Nguyen Lam Vuong</h3>
+      <p class="role">Captain & Lead Architect</p>
+      <p>Turns ambitious ideas into engineering reality.</p>
+    </div>
+    <div class="team-member">
+      <img src="images/Nam.jpg" alt="Pham Do Quoc Nam">
+      <h3>Pham Do Quoc Nam</h3>
+      <p class="role">Data Scientist & Theoretical Backbone</p>
+      <p>Where equations get complicated, he thrives.</p>
+    </div>
+    <div class="team-member">
+      <img src="images/Kiet.jpg" alt="Nguyen Anh Kiet">
+      <h3>Nguyen Anh Kiet</h3>
+      <p class="role">General Manager</p>
+      <p>Keeps the entire project on track and visible.</p>
+    </div>
+    <div class="team-member">
+      <img src="images/Thinh.jpg" alt="Nguyen Pham Dexter Thinh">
+      <h3>Nguyen Pham Dexter Thinh</h3>
+      <p class="role">Business Strategist & Designer</p>
+      <p>Shapes the brand, the strategy, and the user experience.</p>
+    </div>
+    <div class="team-member">
+      <img src="images/Hai.jpg" alt="Phung Hieu Hai">
+      <h3>Phung Hieu Hai</h3>
+      <p class="role">Mechanist & Visual Engineer</p>
+      <p>Builds the hardware and brings our vision to life.</p>
+    </div>
+  </div>
+</section>
+<script>
+  document.querySelectorAll(".team-member img").forEach(img => {
+    img.addEventListener("error", () => {
+      img.src = "images/default.png";
+    });
+  });
+</script>
+
+
+
+<!-- GET INVOLVED SECTION -->
+<section id="get-involved" class="section">
+  <h2 class="center">Get Involved</h2>
+  <h3 class="center" style="margin-top: 10px;">Join the Mission</h3>
+  <p class="center" style="margin-top: 3px;">We are seeking partners, labs, engineers, and believers — people who know that breakthroughs often begin with small teams and bold ideas.</p>
+  <h4 style="margin-top: 20px;">Opportunities:</h4>
+  <ul>
+    <li style="margin-top: 10px;">R&D partnerships</li>
+    <li style="margin-top: 10px;">Co-development</li>
+    <li style="margin-top: 10px;">Licensing</li>
+    <li style="margin-top: 10px;">Experimental collaboration</li>
+  </ul>
+  <div class="center" style="margin-top: 50px;">
+    <a href="#contact" class="cta-primary">Partner With Us</a>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="section dark">
+  <h2 class="center">Contact Us</h2>
+  <p class="center">Connect with us to shape the future of hypersonic flight and plasma technology.</p>
+  <div class="contact-form-container" style="margin-top: 20px;">
+    <form id="contactForm" class="contact-form">
+      <input id="name" placeholder="Your name" required>
+      <input id="email" type="email" placeholder="Your email" required>
+      <textarea id="message" placeholder="Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const btn = e.target.querySelector("button");
+  btn.textContent = "Sending...";
+  btn.disabled = true;
+
+  const res = await fetch("/api/send-email", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: name.value,
+      email: email.value,
+      message: message.value
+    })
+  });
+
+  btn.textContent = "Send";
+  btn.disabled = false;
+
+  if (res.ok) {
+    alert("✅ Email đã gửi thành công!");
+    e.target.reset();
+  } else {
+    alert("❌ Gửi email thất bại");
+  }
+});
+</script>
+
+<script>
+const bg = document.getElementById("bg"), ctx = bg.getContext("2d");
+function resize() { bg.width = innerWidth; bg.height = innerHeight; }
+addEventListener("resize", resize);
+resize();
+let photons = Array.from({length: 120}, () => ({x: Math.random()*bg.width, y: Math.random()*bg.height, vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4}));
+(function animateBG(){
+  ctx.clearRect(0,0,bg.width,bg.height);
+  photons.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if(p.x < 0 || p.x > bg.width) p.vx *= -1;
+    if(p.y < 0 || p.y > bg.height) p.vy *= -1;
+    ctx.fillStyle = "#7f7cff";
+    ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI*2); ctx.fill();
+  });
+  requestAnimationFrame(animateBG);
+})();
+</script>
+
+</body>
+</html>
