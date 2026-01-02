@@ -797,22 +797,17 @@ initReentryLab("lab3d-right");
 document.getElementById("contactForm").addEventListener("submit", async e => {
   e.preventDefault();
 
-  const btn = e.target.querySelector("button");
-  btn.textContent = "Sending...";
-  btn.disabled = true;
-
   const res = await fetch("/api/send-email", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({
-      name: name.value,
-      email: email.value,
-      message: message.value
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      message: document.getElementById("message").value
     })
   });
-
-  btn.textContent = "Send";
-  btn.disabled = false;
 
   if (res.ok) {
     alert("✅ Email đã gửi thành công!");
@@ -844,3 +839,4 @@ let photons = Array.from({length: 120}, () => ({x: Math.random()*bg.width, y: Ma
 
 </body>
 </html>
+
